@@ -1,30 +1,16 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import styles from './Root.module.css';
 
-function getLinkStyle({ isActive }: { isActive: boolean }) {
-  return isActive ? styles.active : '';
-}
-
 function Root() {
   return (
     <>
       <nav className={styles.navbar}>
         <ul>
           <li>
-            <NavLink
-              to="welcome"
-              className={getLinkStyle}
-            >
-              Welcome
-            </NavLink>
+            <NavLink to="welcome">Welcome</NavLink>
           </li>
           <li>
-            <NavLink
-              to="main"
-              className={getLinkStyle}
-            >
-              Main
-            </NavLink>
+            <NavLink to="main">Main</NavLink>
           </li>
         </ul>
       </nav>

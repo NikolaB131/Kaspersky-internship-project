@@ -29,5 +29,10 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'react/button-has-type': 'off',
     '@typescript-eslint/no-shadow': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
+    'object-curly-newline': 'off',
+    'react/require-default-props': 'off',
+    'arrow-parens': ['error', 'as-needed'],
   },
 };
