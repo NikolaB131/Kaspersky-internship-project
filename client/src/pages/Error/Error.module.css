@@ -1,0 +1,14 @@
+.container {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container h1 {
+  color: rgba(190, 0, 0);
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
