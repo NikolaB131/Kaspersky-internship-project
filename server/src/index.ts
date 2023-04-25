@@ -1,7 +1,7 @@
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import express from 'express';
-import mockData5k from '../mock_data_5000.json';
-import mockData50k from '../mock_data_50000.json';
+import mockData5k from '../mock_data_5000.json' assert { type: 'json' };
+import mockData50k from '../mock_data_50000.json' assert { type: 'json' };
 dotenv.config();
 
 const app = express();
