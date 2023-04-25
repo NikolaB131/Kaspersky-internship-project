@@ -7,6 +7,7 @@ import listSvg from '../../assets/list.svg';
 import avatarSvg from '../../assets/avatar.svg';
 import kanbanSvg from '../../assets/kanban.svg';
 import styles from './Main.module.css';
+import useToggle from '../../hooks/useToggle';
 
 type Staff = {
   data: Employee[] | undefined,
@@ -35,13 +36,49 @@ function Main() {
     }
   }, [fetchedData.data]);
 
-  const onInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const inputText = e.target.value;
     worker.postMessage({ type: 'search', data: inputText });
     worker.onmessage = res => {
       setData(res.data);
     };
-  }, []);
+  }
+
+  const [arrowNameToggle, setArrowNameToggle] = useToggle();
+  const [arrowGroupToggle, setArrowGroupToggle] = useToggle();
+  const [arrowEmailToggle, setArrowEmailToggle] = useToggle();
+  const [arrowPhoneToggle, setArrowPhoneToggle] = useToggle();
+  function onArrowClick(type: 'name' | 'group' | 'email' | 'phone') {
+    console.time('sorting');
+    const tempArr = data.slice();
+    const sortBA = () => tempArr.sort((a, b) => b[type].localeCompare(a[type]));
+    const sortAB = () => tempArr.sort((a, b) => a[type].localeCompare(b[type]));
+    switch (type) {
+      case 'name':
+        if (arrowNameToggle) sortBA();
+        else sortAB();
+        setArrowNameToggle();
+        break;
+      case 'group':
+        if (arrowGroupToggle) sortBA();
+        else sortAB();
+        setArrowGroupToggle();
+        break;
+      case 'email':
+        if (arrowEmailToggle) sortBA();
+        else sortAB();
+        setArrowEmailToggle();
+        break;
+      case 'phone':
+        if (arrowPhoneToggle) sortBA();
+        else sortAB();
+        setArrowPhoneToggle();
+        break;
+      default:
+    }
+    console.timeEnd('sorting');
+    setData(tempArr);
+  }
 
   const lastRowRef = useCallback((rowRef: HTMLDivElement) => {
     if (observer.current) observer.current.disconnect();
@@ -90,6 +127,7 @@ function Main() {
         isLoading: fetchedData.isLoading,
         error: fetchedData.error,
         ref: lastRowRef,
+        onArrowClick,
       }}
       />
     </div>

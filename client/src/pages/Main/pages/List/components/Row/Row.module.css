@@ -1,4 +1,5 @@
 .container {
+  height: 45px;
   padding: 12px;
 
   background-color: #e8e8e8;
@@ -14,4 +15,23 @@
 
 .color_dark_grey {
   background-color: #d8d8d8;
+}
+
+.span_container {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  cursor: pointer;
+}
+
+.span_container img {
+  height: 10px;
+
+  transition-duration: 0.3s;
+}
+
+.span_container img.active {
+  transform: rotate(180deg);
 }

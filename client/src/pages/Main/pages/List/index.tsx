@@ -9,14 +9,23 @@ type Props = {
   isLoading: boolean,
   error: string | undefined,
   ref: ForwardedRef<HTMLDivElement>,
+  onArrowClick: (type: string) => void,
 };
 
 const List = forwardRef(function List() {
-  const { data, isLoading, error, ref }: Props = useOutletContext();
+  const { data, isLoading, error, ref, onArrowClick }: Props = useOutletContext();
 
   return (
     <div>
-      <Row index={-1} name="Полное имя" group="Группа" email="Электронная почта" phone="Номер телефона" isHeader />
+      <Row
+        index={-1}
+        name="Полное имя"
+        group="Группа"
+        email="Электронная почта"
+        phone="Номер телефона"
+        isHeader
+        onArrowClick={onArrowClick}
+      />
       {isLoading && <p style={{ textAlign: 'center' }}>Загрузка...</p>}
       {error && <p style={{ textAlign: 'center' }}>Ошибка!</p>}
       {data && data.map((elem, i) => {
