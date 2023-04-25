@@ -14,37 +14,55 @@ type Staff = {
   error: string | undefined,
 };
 
+const LOAD_ROWS_COUNT = 20;
+
+const worker = new Worker(new URL('./../../workers/searchWorker.ts', import.meta.url), { type: 'module' });
+
 function Main() {
+  const [rowsCount, setRowsCount] = useState(LOAD_ROWS_COUNT);
+  const [data, setData] = useState<Employee[]>([]);
+  const fetchedData: Staff = useFetch('http://localhost:4000/api/staff');
+
   const searchRef = useRef<HTMLInputElement>(null);
+  const lastRowRef = useRef(null);
+  const observer = useRef<IntersectionObserver | null>(null);
 
   function handleSearchClick() {
     searchRef.current?.focus();
   }
 
-  const [data, setData] = useState<Employee[]>([]);
-  const fetchedData: Staff = useFetch('http://localhost:4000/api/staff');
   useEffect(() => {
     if (fetchedData.data) {
-      setData(fetchedData.data);
+      worker.postMessage({ type: 'init', data: fetchedData.data });
+      setData(fetchedData.data.slice(0, LOAD_ROWS_COUNT));
     }
   }, [fetchedData.data]);
 
   function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const inputText = e.target.value.toLowerCase();
-    if (fetchedData.data) {
-      const sortedData = fetchedData.data.filter(elem => {
-        if (inputText === '') return true;
-        // Если в поиске нет чисел
-        if (/\D/g.test(inputText)) {
-          return elem.name.toLowerCase().includes(inputText)
-          || elem.email.toLowerCase().includes(inputText)
-          || elem.group.toLowerCase().includes(inputText);
-        }
-        return elem.phone.includes(inputText);
-      });
-      setData(sortedData);
-    }
+    const inputText = e.target.value;
+    worker.postMessage({ type: 'search', data: inputText });
+    worker.onmessage = res => {
+      setData(res.data.slice(0, rowsCount));
+    };
   }
+
+  useEffect(() => {
+    const row = lastRowRef.current;
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(entries => {
+      if (
+        fetchedData.data &&
+        entries[0].isIntersecting &&
+        rowsCount < fetchedData.data.length &&
+        rowsCount <= data.length
+      ) {
+        const newRowsCount = rowsCount + LOAD_ROWS_COUNT;
+        setData(fetchedData.data.slice(0, newRowsCount));
+        setRowsCount(newRowsCount);
+      }
+    });
+    if (row) observer.current.observe(row);
+  }, [lastRowRef.current, rowsCount]);
 
   return (
     <div className={styles.container}>
@@ -62,7 +80,13 @@ function Main() {
         </nav>
         <div className={styles.dummy} />
       </div>
-      <Outlet context={{ data, isLoading: fetchedData.isLoading, error: fetchedData.error }} />
+      <Outlet context={{
+        data,
+        isLoading: fetchedData.isLoading,
+        error: fetchedData.error,
+        ref: lastRowRef,
+      }}
+      />
     </div>
   );
 }

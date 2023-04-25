@@ -35,5 +35,10 @@ module.exports = {
     'react/require-default-props': 'off',
     'arrow-parens': ['error', 'as-needed'],
     'max-len': ['error', { code: 120 }],
+    'no-plusplus': 'off',
+    'no-restricted-syntax': 'off',
+    'operator-linebreak': ['error', 'after'],
+    'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
+    'react-hooks/exhaustive-deps': 'warn',
   },
 };
