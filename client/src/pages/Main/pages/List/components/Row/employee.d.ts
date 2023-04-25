@@ -1,5 +1,6 @@
 type Employee = {
-  index: number,
+  isEven?: boolean,
+  index?: number,
   name: string,
   group: string,
   email: string,

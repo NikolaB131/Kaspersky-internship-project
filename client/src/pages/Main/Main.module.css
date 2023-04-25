@@ -13,6 +13,15 @@
   justify-content: space-between;
 }
 
+.search_container {
+  width: 330px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
 .search {
   width: 200px;
   height: 45px;
@@ -66,5 +75,5 @@
 }
 
 .dummy {
-  width: 200px;
+  width: 330px;
 }

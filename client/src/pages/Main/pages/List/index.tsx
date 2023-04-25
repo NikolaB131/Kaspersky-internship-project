@@ -1,6 +1,7 @@
 import { ForwardedRef, forwardRef } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import Row from './components/Row';
+import isEven from '../../../../helpers/isEven';
 import Employee from './components/Row/employee';
 
 type Props = {
@@ -20,14 +21,14 @@ const List = forwardRef(function List() {
       {error && <p style={{ textAlign: 'center' }}>Ошибка!</p>}
       {data && data.map((elem, i) => {
         let tempRef = null;
-        if (data.length - 10 === i) {
+        if (data.length - 20 === i) {
           tempRef = ref;
         }
         return (
           <Row
+            isEven={isEven(i)}
             ref={tempRef}
             key={elem.index}
-            index={elem.index}
             name={elem.name}
             group={elem.group}
             email={elem.email}

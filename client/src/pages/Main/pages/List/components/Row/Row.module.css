@@ -7,8 +7,9 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
-.color_green {
+.header {
   background-color: #91CA94;
+  border-radius: 15px 15px 0 0;
 }
 
 .color_dark_grey {

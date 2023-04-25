@@ -40,5 +40,6 @@ module.exports = {
     'operator-linebreak': ['error', 'after'],
     'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
     'react-hooks/exhaustive-deps': 'warn',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
   },
 };

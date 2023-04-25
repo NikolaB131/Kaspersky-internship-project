@@ -10,6 +10,7 @@ import Welcome from './pages/Welcome';
 import Error from './pages/Error';
 import Main from './pages/Main';
 import List from './pages/Main/pages/List';
+import Cards from './pages/Main/pages/Cards';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route path="main" element={<Main />}>
         <Route index element={<Navigate to="list" />} />
         <Route path="list" element={<List />} />
+        <Route path="cards" element={<Cards />} />
       </Route>
       <Route path="*" element={<Error />} />
     </Route>,
