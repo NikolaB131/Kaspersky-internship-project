@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT;
 const mock_data_size = process.env.MOCK_DATA_SIZE;
 
-app.listen(() => {
+app.listen(port, () => {
   console.log(`Server started on port ${port}`);
   console.log('\x1b[36m%s\x1b[0m', `http://localhost:${port}`);
 });
