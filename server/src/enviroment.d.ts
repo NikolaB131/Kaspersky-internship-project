@@ -1,7 +1,8 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      PORT: number,
+      PORT: string,
+      LATENCY: string,
       MOCK_DATA_SIZE: '5k' | '50k',
     }
   }
