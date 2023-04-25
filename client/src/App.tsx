@@ -11,6 +11,7 @@ import Error from './pages/Error';
 import Main from './pages/Main';
 import List from './pages/Main/pages/List';
 import Cards from './pages/Main/pages/Cards';
+import Groups from './pages/Main/pages/Groups';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
         <Route index element={<Navigate to="list" />} />
         <Route path="list" element={<List />} />
         <Route path="cards" element={<Cards />} />
+        <Route path="groups" element={<Groups />} />
       </Route>
       <Route path="*" element={<Error />} />
     </Route>,

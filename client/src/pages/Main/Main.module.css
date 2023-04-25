@@ -14,7 +14,7 @@
 }
 
 .search_container {
-  width: 330px;
+  width: var(--search-width);
 
   display: flex;
   justify-content: center;
@@ -53,7 +53,7 @@
 
   padding: 10px 20px;
 
-  background-color: #ffffff;
+  background-color: white;
   border-radius: 15px;
 }
 
@@ -75,5 +75,5 @@
 }
 
 .dummy {
-  width: 330px;
+  width: var(--search-width);
 }

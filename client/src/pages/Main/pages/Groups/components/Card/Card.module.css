@@ -1,0 +1,24 @@
+.container {
+  background-color: #eeeeee;
+  border-radius: 5px;
+
+  width: 100%;
+  padding: 5px 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.container span {
+  font-size: 0.75rem;
+}
+
+.name {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.email {
+  word-break: break-all;
+}

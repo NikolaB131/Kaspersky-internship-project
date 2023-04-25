@@ -5,7 +5,7 @@ import Employee from './pages/List/components/Row/employee';
 import searchSvg from '../../assets/search.svg';
 import listSvg from '../../assets/list.svg';
 import avatarSvg from '../../assets/avatar.svg';
-import kanbanSvg from '../../assets/kanban.svg';
+import groupsSvg from '../../assets/groups.svg';
 import styles from './Main.module.css';
 import useToggle from '../../hooks/useToggle';
 
@@ -15,7 +15,7 @@ type Staff = {
   error: string | undefined,
 };
 
-const LOAD_ROWS_COUNT = 20;
+const LOAD_ROWS_COUNT = 30;
 
 const worker = new Worker(new URL('./../../workers/searchWorker.ts', import.meta.url), { type: 'module' });
 
@@ -117,7 +117,7 @@ function Main() {
           <ul className={styles.navbar}>
             <li><Link to="list"><img src={listSvg} alt="" /></Link></li>
             <li><Link to="cards"><img src={avatarSvg} alt="" /></Link></li>
-            <li><img src={kanbanSvg} alt="" /></li>
+            <li><Link to="groups"><img src={groupsSvg} alt="" /></Link></li>
           </ul>
         </nav>
         <div className={styles.dummy} />
